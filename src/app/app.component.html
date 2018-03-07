@@ -7,4 +7,10 @@
 
 <app-field></app-field>
 
+<div *ngIf="checkWin()" style="text-align:center">
+  <h1>
+    Game is over! The winner is {{winner}}!
+  </h1>
+  <button (click) = "refreshFields()">Restart</button>
+</div>
 

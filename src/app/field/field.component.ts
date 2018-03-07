@@ -28,8 +28,8 @@ export class FieldComponent implements OnInit {
   select(x: number, y: number): void {
     if (this.gameService.getWhoseTurn() === this.whoseTurn
           && !this.getQuad(x, y).isSelected) {
-      this.quadService.select(x, y, Turn.X);
       this.quadService.checkWin();
+      this.quadService.select(x, y, Turn.X);
       this.gameService.nextTurn(Turn.X);
     }
   }
@@ -44,8 +44,14 @@ export class FieldComponent implements OnInit {
     if (quad.whoSelected === Turn.X) {
       style = 'url(\'../../assets/k.png\')';
     }
+    if (quad.whoSelected === Turn.X && quad.win) {
+      style = 'url(\'../../assets/k_win.png\')';
+    }
     if (quad.whoSelected === Turn.O) {
       style = 'url(\'../../assets/n.png\')';
+    }
+    if (quad.whoSelected === Turn.O && quad.win) {
+      style = 'url(\'../../assets/n_win.png\')';
     }
     return style;
   }

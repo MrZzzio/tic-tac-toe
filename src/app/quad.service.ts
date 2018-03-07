@@ -36,7 +36,6 @@ export class QuadService {
     if (!this.quads[y][x].isSelected) {
       this.quads[y][x].isSelected = true;
       this.quads[y][x].whoSelected = turn;
-      // console.log('selected ' + (y + 1) + '-' + (x + 1) + '!');
       result = true;
     }
     return result;
@@ -57,38 +56,63 @@ export class QuadService {
     if ((this.quads[0][0].whoSelected !== null) && (this.quads[0][0].whoSelected === this.quads[0][1].whoSelected)
       && (this.quads[0][0].whoSelected === this.quads[0][2].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[0][0]);
+      this.setQuadWin(this.quads[0][1]);
+      this.setQuadWin(this.quads[0][2]);
     }
     if ((this.quads[1][0].whoSelected !== null) && (this.quads[1][0].whoSelected === this.quads[1][1].whoSelected)
       && (this.quads[1][0].whoSelected === this.quads[1][2].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[1][0]);
+      this.setQuadWin(this.quads[1][1]);
+      this.setQuadWin(this.quads[1][2]);
     }
     if ((this.quads[2][0].whoSelected !== null) && (this.quads[2][0].whoSelected === this.quads[2][1].whoSelected)
       && (this.quads[2][0].whoSelected === this.quads[2][2].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[2][0]);
+      this.setQuadWin(this.quads[2][1]);
+      this.setQuadWin(this.quads[2][2]);
     }
     if ((this.quads[0][0].whoSelected !== null) && (this.quads[0][0].whoSelected === this.quads[1][0].whoSelected)
       && (this.quads[0][0].whoSelected === this.quads[2][0].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[0][0]);
+      this.setQuadWin(this.quads[1][0]);
+      this.setQuadWin(this.quads[2][0]);
     }
     if ((this.quads[0][1].whoSelected !== null) && (this.quads[0][1].whoSelected === this.quads[1][1].whoSelected)
       && (this.quads[0][1].whoSelected === this.quads[2][1].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[0][1]);
+      this.setQuadWin(this.quads[1][1]);
+      this.setQuadWin(this.quads[2][1]);
     }
     if ((this.quads[0][2].whoSelected !== null) && (this.quads[0][2].whoSelected === this.quads[1][2].whoSelected)
       && (this.quads[0][2].whoSelected === this.quads[2][2].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[0][2]);
+      this.setQuadWin(this.quads[1][2]);
+      this.setQuadWin(this.quads[2][2]);
     }
     if ((this.quads[0][0].whoSelected !== null) && (this.quads[0][0].whoSelected === this.quads[1][1].whoSelected)
       && (this.quads[0][0].whoSelected === this.quads[2][2].whoSelected)) {
       result = true;
+      this.setQuadWin(this.quads[0][0]);
+      this.setQuadWin(this.quads[1][1]);
+      this.setQuadWin(this.quads[2][2]);
     }
     if ((this.quads[0][2].whoSelected !== null) && (this.quads[0][2].whoSelected === this.quads[1][1].whoSelected)
       && (this.quads[0][2].whoSelected === this.quads[2][0].whoSelected)) {
       result = true;
-    }
-    if (result) {
-      console.log('WIN');
+      this.setQuadWin(this.quads[0][2]);
+      this.setQuadWin(this.quads[1][1]);
+      this.setQuadWin(this.quads[2][0]);
     }
     return result;
+  }
+
+  private setQuadWin(quad: Quad): void {
+    quad.win = true;
   }
 }
