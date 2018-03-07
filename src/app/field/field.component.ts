@@ -13,6 +13,8 @@ import { Turn } from '../turn';
 })
 export class FieldComponent implements OnInit {
 
+  private whoseTurn: Turn;
+
   constructor(private quadService: QuadService,
               private gameService: GameService,
               private botService: BotService) { }
@@ -20,12 +22,16 @@ export class FieldComponent implements OnInit {
   ngOnInit() {
     this.createQuads();
     this.botService.start();
+    this.whoseTurn = Turn.X;
   }
   
   select(x: number, y: number): void {
-    this.quadService.select(x, y, Turn.X);
-    // this.gameService.checkWin();
-    this.gameService.nextTurn(Turn.X);
+    if (this.gameService.getWhoseTurn() === this.whoseTurn
+          && !this.getQuad(x, y).isSelected) {
+      this.quadService.select(x, y, Turn.X);
+      this.quadService.checkWin();
+      this.gameService.nextTurn(Turn.X);
+    }
   }
 
   getQuad(x: number, y: number): Quad {

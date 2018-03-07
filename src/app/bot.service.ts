@@ -12,17 +12,24 @@ export class BotService {
               private gameService: GameService) { }
 
   start(): void {
-    setInterval(() => {
-      if (this.gameService.getWhoseTurn() === Turn.O) {
+    let interval = setInterval(() => {
+      if (this.gameService.getWhoseTurn() === Turn.O 
+        && this.quadService.hasEmptyQuad()) {
         let x, y;
         do {
           x = _.random(0, 2);
           y = _.random(0, 2);
         } while (this.quadService.getQuad(x, y).isSelected !== false);
-        console.log('bot\'s turn');
+        if (this.quadService.checkWin()) {
+          this.stop(interval);
+          return;
+        }
         this.quadService.select(x, y, Turn.O);
-        // this.gameService.checkWin();
         this.gameService.nextTurn(Turn.O)
       }}, 2500);
+  }
+
+  stop(interval): void {
+    clearInterval(interval);
   }
 }
